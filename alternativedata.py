@@ -69,7 +69,7 @@ def _standardize_ibov():
         
     except:
         
-        print("An error occurred while parsing data from IBOV.")
+        print("An error occurred while manipulating data from IBOV.")
 
 
 def _standardize_sp500():
@@ -79,38 +79,43 @@ def _standardize_sp500():
   return df
 
 
-@_logging_error
-def index_composition(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
+def _adapt_index(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
 
-  '''
-  This function captures the latest composition of IBOV. It is updated every 4 months.
-
-  Parameters
-    ----------
-  ativos : you can pass a list with the desired tickets. Default = 'all'.
-  mode: you can return either the whole dataframe from B3, or just the list containing the tickers which compose IBOV. Default = 'df'.
-  reduction: you can choose whether the result should come with the reduction and theorical quantitiy provided by B3. Default = True.
-
-  '''
-  
-  if index = 'ibov':
-      df = _standardize_ibov()
-      
-      if reduction == False:
+    if index = 'ibov':
+        df = _standardize_ibov()
+    
+    if reduction == False:
         df = df[:-2]
     
-      if ativos != 'all':
+    if ativos != 'all':
         df = df[df['Código'].isin(ativos)]    
     
-      if mode == 'list':
+    if mode == 'list':
         df = list(df.Código)
     
-  if index = 'sp500':
-      df = _standardize_sp500()
+    if index = 'sp500':
+        df = _standardize_sp500()
+
+
+    return df
+
+
+@_logging_error
+def index_composition(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
+    '''
+    This function captures the latest composition of IBOV. It is updated every 4 months.
     
+    Parameters
+    ----------
+    ativos : you can pass a list with the desired tickets. Default = 'all'.
+    mode: you can return either the whole dataframe from B3, or just the list containing the tickers which compose IBOV. Default = 'df'.
+    reduction: you can choose whether the result should come with the reduction and theorical quantitiy provided by B3. Default = True.
+    
+    '''
+    
+    df = _adapt_index(index, ativos, mode, reduction)
 
-
-  return df
+    return df
 
 
 
