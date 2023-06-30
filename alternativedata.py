@@ -73,10 +73,12 @@ def _standardize_ibov():
 
 
 def _standardize_sp500():
+    
     table=pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    
     df = table[0]
 
-  return df
+    return df
 
 
 def _adapt_index(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
@@ -87,7 +89,7 @@ def _adapt_index(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
     if reduction == False:
         df = df[:-2]
     
-    if ativos != 'all':
+    if assets != 'all':
         df = df[df['Código'].isin(ativos)]    
     
     if mode == 'list':
@@ -101,7 +103,7 @@ def _adapt_index(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
 
 
 @_logging_error
-def index_composition(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
+def index_composition(index = 'ibov', assets = 'all', mode = 'df', reduction = True):
     '''
     This function captures the latest composition of IBOV. It is updated every 4 months.
     
@@ -113,7 +115,7 @@ def index_composition(index = 'ibov', ativos = 'all', mode = 'df', reduction = T
     
     '''
     
-    df = _adapt_index(index, ativos, mode, reduction)
+    df = _adapt_index(index, assets, mode, reduction)
 
     return df
 
