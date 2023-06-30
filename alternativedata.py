@@ -81,22 +81,27 @@ def _standardize_sp500():
     return df
 
 
-def _adapt_index(index = 'ibov', ativos = 'all', mode = 'df', reduction = True):
+def _adapt_index(index = 'ibov', assets = 'all', mode = 'df', reduction = True):
 
     if index = 'ibov':
+        
         df = _standardize_ibov()
+        
+        if reduction == False:
+            df = df[:-2]
     
-    if reduction == False:
-        df = df[:-2]
-    
-    if assets != 'all':
-        df = df[df['Código'].isin(ativos)]    
-    
-    if mode == 'list':
-        df = list(df.Código)
+        if assets != 'all':
+            df = df[df['Código'].isin(assets)]    
+        
+        if mode == 'list':
+            df = list(df.Código)
     
     if index = 'sp500':
+        
         df = _standardize_sp500()
+
+        if assets != 'all':
+            df = df[df['Symbol'].isin(assets)]    
 
 
     return df
