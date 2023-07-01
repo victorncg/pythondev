@@ -62,7 +62,7 @@ def _standardize_ibov():
         
         df = _parse_ibov()
         df.columns = list(df.iloc[1])
-        df[2:][['Código','Ação',	'Tipo',	'Qtde. Teórica','Part. (%)']]
+        df[2:][['Código','Ação', 'Tipo', 'Qtde. Teórica','Part. (%)']]
         df.reset_index(drop=True, inplace=True)
         
         return df
@@ -74,7 +74,7 @@ def _standardize_ibov():
 
 def _standardize_sp500():
     
-    table=pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    table = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
     
     df = table[0]
 
@@ -101,8 +101,10 @@ def _adapt_index(index = 'ibov', assets = 'all', mode = 'df', reduction = True):
         df = _standardize_sp500()
 
         if assets != 'all':
-            df = df[df['Symbol'].isin(assets)]    
+            df = df[df['Symbol'].isin(assets)]
 
+        if mode == 'list':
+            df = list(df.Symbol)
 
     return df
 
@@ -114,6 +116,7 @@ def index_composition(index = 'ibov', assets = 'all', mode = 'df', reduction = T
     
     Parameters
     ----------
+    index : choose the index to be returned, if IBOV or S&P 500
     ativos : you can pass a list with the desired tickets. Default = 'all'.
     mode: you can return either the whole dataframe from B3, or just the list containing the tickers which compose IBOV. Default = 'df'.
     reduction: you can choose whether the result should come with the reduction and theorical quantitiy provided by B3. Default = True.
