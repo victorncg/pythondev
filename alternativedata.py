@@ -81,7 +81,7 @@ def _standardize_sp500():
     return df
 
 
-def _adapt_index(index = 'ibov', assets = 'all', mode = 'df', reduction = True):
+def _adapt_index(index:object, assets = 'all', mode = 'df', reduction = True):
 
     if index == 'ibov':
         
