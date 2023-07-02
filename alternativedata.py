@@ -59,7 +59,7 @@ def _standardize_ibov():
         
         df = _parse_ibov()
         df.columns = list(df.iloc[1])
-        df[2:][['Código','Ação', 'Tipo', 'Qtde. Teórica','Part. (%)']]
+        df = df[2:][['Código','Ação', 'Tipo', 'Qtde. Teórica','Part. (%)']]
         df.reset_index(drop=True, inplace=True)
         
         return df
