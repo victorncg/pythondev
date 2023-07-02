@@ -81,7 +81,7 @@ def _standardize_sp500():
     return df
 
 
-def _adapt_index(index:object, assets = 'all', mode = 'df', reduction = True):
+def _adapt_index(index:object, assets:object = 'all', mode:object = 'df', reduction:bool = True):
 
     if index == 'ibov':
         
@@ -110,7 +110,7 @@ def _adapt_index(index:object, assets = 'all', mode = 'df', reduction = True):
 
 
 @_logging_error
-def index_composition(index = 'ibov', assets = 'all', mode = 'df', reduction = True):
+def index_composition(index:object, assets:object = 'all', mode:object = 'df', reduction:bool = True):
     '''
     This function captures the latest composition of IBOV. It is updated every 4 months.
     
