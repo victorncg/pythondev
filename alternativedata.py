@@ -7,9 +7,6 @@
 # B3
 # S&P 500
 
-
-# Criar uma função prévia que obtém os dados do IBOV, antes de processá-lo
-
 import pandas as pd
 
 import functools
