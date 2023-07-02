@@ -82,7 +82,19 @@ def _standardize_sp500():
 
 
 def _adapt_index(index:object, assets:object = 'all', mode:object = 'df', reduction:bool = True):
+    '''
+    This function processes the data from the latest composition of either IBOV or S&P 500. It is updated every 4 months.
+    
+    Parameters
+    ----------
+    index : choose the index to be returned, if IBOV or S&P 500
+    ativos : you can pass a list with the desired tickets. Default = 'all'.
+    mode: you can return either the whole dataframe from B3, or just the list containing the tickers which compose IBOV. Default = 'df'.
+    reduction: you can choose whether the result should come with the reduction and theorical quantitiy provided by B3. Default = True.
+    
+    '''
 
+    
     if index == 'ibov':
         
         df = _standardize_ibov()
@@ -112,7 +124,7 @@ def _adapt_index(index:object, assets:object = 'all', mode:object = 'df', reduct
 @_logging_error
 def index_composition(index:object, assets:object = 'all', mode:object = 'df', reduction:bool = True):
     '''
-    This function captures the latest composition of IBOV. It is updated every 4 months.
+    This function captures the latest composition of either IBOV or S&P 500. It is updated every 4 months.
     
     Parameters
     ----------
